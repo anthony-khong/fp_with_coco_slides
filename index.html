@@ -74,6 +74,9 @@
             [3, 2, 1, 999]
             ```
         </textarea></section>
+        <section>
+            <img data-src="figures/annoyed.gif" width="65%">
+        </section>
         <section data-markdown id="python_immutability3"><textarea data-template>
             ```python
             >>> def g(xs):
@@ -118,6 +121,9 @@
             [1, 2, 3, 999]
             ```
         </textarea></section>
+        <section>
+            <img data-src="figures/thumbs_up.gif" width="75%">
+        </section>
         <section id="immutability_gives_predictability">
             <h3><span style="color:slateblue">Immutability = Predictability</span></h3>
             <aside class="notes">
@@ -406,7 +412,7 @@ def pipeline(stages):
         fitted_stages = [fit(s, train_df) for s in stages]
         def xform_fn(test_df):
             for fs in fited_stages:
-                test_df = fs(test_df)
+                test_df = transform(fs, test_df)
             return test_df
         return Transformer(xform_fn)
     return Estimator(fit_fn)
