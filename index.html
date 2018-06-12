@@ -319,6 +319,17 @@
             >>> primes() |> takewhile$(x -> x < 60) |> list
             [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
             ```
+            <aside class="notes">
+                - Currying is a fancy name for partial application of a function.
+                - In Python, you have the partial module.
+                - The main idea is to start with a function of many arguments, and go down to a
+                  function with fewer arguments (usually one).
+                - This makes the syntax more concise, because instead of writing a lambda in
+                  takewhile, you write a curried takewhile.
+                - Note that in pure Python, you'd have to apply partial.
+                - It's hard, it's not readable. Nobody would ever do it.
+                - Next is iterator chaining...
+            </aside>
         </textarea></section>
         <section data-markdown id="iterator_chaining"><textarea data-template>
             <h4><span style="color:mediumseagreen">Iterator Chaining</span></h4>
@@ -419,9 +430,6 @@
             λ> takeWhile (<60) primes
             ```
         </textarea></section>
-        <section id="vince_macmahon">
-            <img data-src="figures/vince_macmahon.gif" width="85%">
-        </section>
     </section>
 
     <section id="pipeline">
