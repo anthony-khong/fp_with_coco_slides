@@ -44,6 +44,11 @@
         <section id="immutability">
             <h2> <span style="color:slateblue">Immutability</span></h2>
             <p>Once assigned, a variable <span style="color:red">cannot</span> change its value.</p>
+            <aside class="notes">
+                - The main idea here is that you work with pure functions.
+                - Purity in the mathematical sense: the same inputs give you the same outputs.
+                - In OO, you often work with stateful objects. A method is most definitely not a pure function.
+            </aside>
         </section>
         <section data-markdown id="python_immutability1"><textarea data-template>
             ```python
@@ -73,10 +78,13 @@
             >>> f(xs)
             [3, 2, 1, 999]
             ```
+            <aside class="notes">
+                - We say that Python lists are mutable. It carries with it state.
+                - From the point where you define xs, you cannot guarantee that it's the same object.
+                - It is not enough to have xs and the definition of f to find out what f(xs) is.
+                - Here, g is not a pure function, because it modifies a global state. In some sense it is lying to you.
+            </aside>
         </textarea></section>
-        <section>
-            <img data-src="figures/annoyed.gif" width="65%">
-        </section>
         <section data-markdown id="python_immutability3"><textarea data-template>
             ```python
             >>> def g(xs):
@@ -90,6 +98,12 @@
             >>> f(xs)
             [1, 2, 3, 999]
             ```
+            <aside class="notes">
+                - Superficially, both g and f are doing the same thing as before.
+                - **Compare the two slides.**
+                - But we changed the implementation of g to make it a pure function.
+                - The diff between reverse and negative step is that the latter makes a new list.
+            </aside>
         </textarea></section>
         <section data-markdown id="haskell_immutability1"><textarea data-template>
             ```haskell
@@ -100,6 +114,11 @@
             λ> f xs
             ???
             ```
+            <aside class="notes">
+                - **Explain Haskell syntax carefully.**
+                - In Haskell you can always guarantee the value of `f xs`.
+                - Anything else, it won't type check. Haskell won't let you do side effects.
+            </aside>
         </textarea></section>
         <section data-markdown id="haskell_immutability2"><textarea data-template>
             ```haskell
@@ -110,6 +129,9 @@
             λ> f xs
             [1, 2, 3, 999]
             ```
+            <aside class="notes">
+                - There something called the **bottom**, which represents never-ending computation.
+            </aside>
         </textarea></section>
         <section data-markdown id="haskell_immutability3"><textarea data-template>
             ```haskell
@@ -120,14 +142,18 @@
             λ> f xs
             [1, 2, 3, 999]
             ```
+            <aside class="notes">
+                - In a real sense, you don't need to know what g is in order to know what `f xs` is. They are irrelevant.
+                - In terms of decoupling. This is a small example that works.
+                - In reality, the side effect could happen somewhere deep in the codebase, where it'd be hard to debug.
+                - Decoupling is good, because you can work with smaller chunks.
+            </aside>
         </textarea></section>
-        <section>
-            <img data-src="figures/thumbs_up.gif" width="75%">
-        </section>
         <section id="immutability_gives_predictability">
             <h3><span style="color:slateblue">Immutability = Predictability</span></h3>
             <aside class="notes">
-                There are many names for this: purity and referential transparency.
+                - You'll hear this term a lot from functional programmers. "Your code is easier to reason about."
+                - This is what it boils down to. Without state, your code is predictable.
             </aside>
         </section>
     </section>
@@ -135,18 +161,39 @@
     <section id="declarative_programming">
         <section id="declarative_programming_title_page">
             <h2><span style="color:slateblue">Declarative Programming</span></h2>
+            <aside class="notes">
+                - As a by-product of functional programming, you often write declarative code instead of imperative code.
+            </aside>
         </section>
 
         <section id="declarative_vs_imperative">
             <h2><span style="color:slateblue">Declarative vs. Imperative</span></h2>
 
             Say <span style="color:blue">what things are</span> rather than <span style="color:red">how things are done</span>.
+
+            <aside class="notes">
+                - Take loops as example, how can you implement a loop without changing things? Many times your index always changes!
+                - There are two alternatives for loops: list comprehensions and maps.
+                - If you think about them, they're definitions instead of an instruction to change things.
+                - Let's look at a bigger example.
+            </aside>
         </section>
         <section id="sieve_subtitle_page">
             <h2><span style="color:slateblue">Sieve of Eratosthenes</span></h2>
+            <aside class="notes">
+                - The idea here is that we'd like to find all prime numbers.
+                - So the objective here is to make an infinite stream of prime numbers.
+                - Here is how we do it...
+            </aside>
         </section>
         <section id="sieve_init">
             <img data-src="figures/sieve.png" width="66%">
+            <aside class="notes">
+                - Start with a stream of numbers starting from two to infinity.
+                - Take the head of the stream, and filter out all factors of the head.
+                - Repeat this step ad infinitum.
+                - Here is an illustration of the algorithm.
+            </aside>
         </section>
         <section id="sieve_animation">
             <img data-src="figures/sieve.gif" width="66%">
@@ -163,6 +210,9 @@
             λ> takeWhile (<60) primes
             [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59]
             ```
+            <aside class="notes">
+                - Carefully go through the Haskell syntax.
+            </aside>
         </textarea></section>
         <section data-markdown id="sieve_python"><textarea data-template>
             <h4><span style="color:darkgreen">Python</span></h4>
@@ -179,6 +229,10 @@
             >>> list(takewhile(lambda x: x < 60, primes()))
             [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
             ```
+            <aside class="notes">
+                - Note the difference between declarative and imperative programming.
+                - Now I'd like to introduce Coconut...
+            </aside>
         </textarea></section>
         <section data-markdown id="sieve_coconut"><textarea data-template>
             <h4><span style="color:mediumseagreen">Coconut</span></h4>
@@ -195,6 +249,12 @@
             >>> list(takewhile(lambda x: x < 60, primes()))
             [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
             ```
+            <aside class="notes">
+                - The first thing to note here is that Coconut is a superset of Python.
+                - All valid Python is valid Coconut. So you can just write Python if you'd like.
+                - Massage this imperative code to make it 1) more idiomatic and 2) more declarative.
+                - First up is this clunky lambda syntax...
+            </aside>
         </textarea></section>
         <section data-markdown id="concise_lambdas"><textarea data-template>
             <h4><span style="color:mediumseagreen">Concise Lambdas</span></h4>
@@ -211,6 +271,14 @@
             >>> list(takewhile(x -> x < 60, primes()))
             [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
             ```
+            <aside class="notes">
+                - In Coconut, we can simply write an arrow for a lambda.
+                - It may seem minor, but if you're writing functional code, you often pass functions as arguments.
+                - In fact, this is how you should pass behaviours around instead of objects with methods.
+                - In that case, you'd like your building blocks to be as concise as possible.
+                - It may seem small, but this is very very nice to write functional codes with.
+                - Next up is functional composition...
+            </aside>
         </textarea></section>
         <section data-markdown id="forward_piping"><textarea data-template>
             <h4><span style="color:mediumseagreen">Forward Piping</span></h4>
@@ -227,6 +295,14 @@
             >>> primes() |> ns -> takewhile(x -> x < 60, ns) |> list
             [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
             ```
+            <aside class="notes">
+                - Instead of clumsy brackets, Coconut gives us a forward pipe operator that allows to do F# style code.
+                - There is another type of composition: the dot composition.
+                - It's right to left instead of left to right, which is similar to Haskell.
+                - Whatever you choose Haskell-style or F#-style it's more readable than the original.
+                - I've softened up on this after doing some Clojure, but I'd still prefer the F#-style code.
+                - Next up is currying...
+            </aside>
         </textarea></section>
         <section data-markdown id="currying"><textarea data-template>
             <h4><span style="color:mediumseagreen">Currying</span></h4>
