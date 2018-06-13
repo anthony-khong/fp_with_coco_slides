@@ -521,7 +521,7 @@
         <section>
             <h3><span style="color:slateblue">What about Pipeline?</span></h3>
             <p></p>
-            <img data-src="figures/pipeline_only_scheme.png" width="60%">
+            <img data-src="figures/pipeline_only_scheme.png" width="70%">
             <p></p>
 
             <section data-markdown class="fragment fade-up"><textarea data-template>
@@ -569,7 +569,7 @@ def pipeline(stages):
             <img data-src="figures/mconcat.png" width="30%">
         </textarea></section>
         <section data-markdown><textarea data-template>
-            ```python
+            ```
             def mempty() = Transformer(df -> df)
 
             def mappend(Transformer(fn0), Transformer(fn1)) =
@@ -592,7 +592,7 @@ def pipeline(stages):
         <section data-markdown><textarea data-template>
             <h3><span style="color:slateblue">One Hot Encoder</span></h3>
 
-```python
+```
 import numpy as np
 
 from pipeline import Estimator, Transformer
