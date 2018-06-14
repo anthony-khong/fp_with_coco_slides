@@ -470,15 +470,22 @@
     <section id="pipeline">
         <section id="pipeline_title_page">
             <h2><span style="color:slateblue">Machine Learning Pipeline</span></h2>
+            <aside class="notes">
+                - Next, I'd like to talk about a more serious application of Coconut.
+                - Still very much a toy example, but a bit bigger.
+            </aside>
         </section>
         <section id="estimator_transformer_flowchart">
             <img data-src="figures/estimator_transformer_flowchart.png" width="150%">
-        </section>
-        <section id="pipeline_flowchart">
-            <img data-src="figures/pipeline_flowchart.png" width="100%">
+            <aside class="notes">
+                - Go through the flowchart very slowly.
+            </aside>
         </section>
         <section id="type_tetris_chart">
             <img data-src="figures/pipeline_scheme.png" width="60%">
+            <aside class="notes">
+                - Go through the flowchart very slowly.
+            </aside>
         </section>
         <section data-markdown><textarea data-template>
             <h3><span style="color:slateblue">Haskell-Style Type Tetris</span></h3>
@@ -492,9 +499,13 @@
             transform     :: Transformer     -> DataFrame -> DataFrame
             pipeline      :: [PipelineStage] -> PipelineStage
             ```
+            <aside class="notes">
+                - Explain type tetris.
+                - Go through types very slowly.
+            </aside>
         </textarea></section>
         <section data-markdown><textarea data-template>
-            ```python
+            ```
             data Estimator(fit_fn)
             data Transformer(xform_fn)
             ```
@@ -509,7 +520,7 @@
             <img data-src="figures/transform_scheme.png" width="80%">
         </textarea></section>
         <section data-markdown><textarea data-template>
-            ```python
+            ```
             def fit(Estimator(fit_fn), df) = fit_fn(df)
 
             @addpattern(fit)
@@ -521,7 +532,7 @@
         <section>
             <h3><span style="color:slateblue">What about Pipeline?</span></h3>
             <p></p>
-            <img data-src="figures/pipeline_only_scheme.png" width="70%">
+            <img data-src="figures/pipeline_only_scheme.png" width="65%">
             <p></p>
 
             <section data-markdown class="fragment fade-up"><textarea data-template>
@@ -540,6 +551,10 @@ def pipeline(stages):
         return Transformer(xform_fn)
     return Estimator(fit_fn)
 ```
+            <aside class="notes">
+                - Go through the pipeline logic first. Then show the code.
+                - Notice triangle of death. This is not how you should do FP.
+            </aside>
             </textarea></section>
         </section>
         <section>
@@ -608,6 +623,11 @@ def transform(column, factors, df) =
     feats = {name(f): df[column] == f for f in factors}
     df.assign(**feats)
 ```
+        <aside class="notes">
+            - As you can see, writing an estimator and a transformer is very similar to writing a class in Python.
+            - However, there are no ceremonies such as init and self.
+            - You are only dealing with algebraic data types and pure functions.
+        </aside>
         </textarea></section>
     </section>
 
