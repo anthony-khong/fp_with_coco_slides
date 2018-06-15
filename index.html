@@ -45,9 +45,9 @@
             <h2> <span style="color:slateblue">Immutability</span></h2>
             <p>Once assigned, a variable <span style="color:red">cannot</span> change its value.</p>
             <aside class="notes">
-                - The main idea here is that you work with pure functions.
-                - Purity in the mathematical sense: the same inputs give you the same outputs.
-                - In OO, you often work with stateful objects. A method is most definitely not a pure function.
+                <p>The main idea here is that you work with pure functions.</p>
+                <p>Purity in the mathematical sense: the same inputs give you the same outputs.</p>
+                <p>In OO, you often work with stateful objects. A method is most definitely not a pure function.</p>
             </aside>
         </section>
         <section data-markdown id="python_immutability1"><textarea data-template>
@@ -79,10 +79,10 @@
             [3, 2, 1, 999]
             ```
             <aside class="notes">
-                - We say that Python lists are mutable. It carries with it state.
-                - From the point where you define xs, you cannot guarantee that it's the same object.
-                - It is not enough to have xs and the definition of f to find out what f(xs) is.
-                - Here, g is not a pure function, because it modifies a global state. In some sense it is lying to you.
+                <p>We say that Python lists are mutable. It carries with it state.</p>
+                <p>From the point where you define xs, you cannot guarantee that it's the same object.</p>
+                <p>It is not enough to have xs and the definition of f to find out what f(xs) is.</p>
+                <p>Here, g is not a pure function, because it modifies a global state. In some sense it is lying to you.</p>
             </aside>
         </textarea></section>
         <section data-markdown id="python_immutability3"><textarea data-template>
@@ -99,10 +99,10 @@
             [1, 2, 3, 999]
             ```
             <aside class="notes">
-                - Superficially, both g and f are doing the same thing as before.
-                - **Compare the two slides.**
-                - But we changed the implementation of g to make it a pure function.
-                - The diff between reverse and negative step is that the latter makes a new list.
+                <p>Superficially, both g and f are doing the same thing as before.</p>
+                <p>**Compare the two slides.**</p>
+                <p>But we changed the implementation of g to make it a pure function.</p>
+                <p>The diff between reverse and negative step is that the latter makes a new list.</p>
             </aside>
         </textarea></section>
         <section data-markdown id="haskell_immutability1"><textarea data-template>
@@ -115,9 +115,9 @@
             ???
             ```
             <aside class="notes">
-                - **Explain Haskell syntax carefully.**
-                - In Haskell you can always guarantee the value of `f xs`.
-                - Anything else, it won't type check. Haskell won't let you do side effects.
+                <p>**Explain Haskell syntax carefully.**</p>
+                <p>In Haskell you can always guarantee the value of `f xs`.</p>
+                <p>Anything else, it won't type check. Haskell won't let you do side effects.</p>
             </aside>
         </textarea></section>
         <section data-markdown id="haskell_immutability2"><textarea data-template>
@@ -130,7 +130,7 @@
             [1, 2, 3, 999]
             ```
             <aside class="notes">
-                - There something called the **bottom**, which represents never-ending computation.
+                <p>There something called the **bottom**, which represents never-ending computation.</p>
             </aside>
         </textarea></section>
         <section data-markdown id="haskell_immutability3"><textarea data-template>
@@ -143,17 +143,17 @@
             [1, 2, 3, 999]
             ```
             <aside class="notes">
-                - In a real sense, you don't need to know what g is in order to know what `f xs` is. They are irrelevant.
-                - In terms of decoupling. This is a small example that works.
-                - In reality, the side effect could happen somewhere deep in the codebase, where it'd be hard to debug.
-                - Decoupling is good, because you can work with smaller chunks.
+                <p>In a real sense, you don't need to know what g is in order to know what `f xs` is. They are irrelevant.</p>
+                <p>In terms of decoupling. This is a small example that works.</p>
+                <p>In reality, the side effect could happen somewhere deep in the codebase, where it'd be hard to debug.</p>
+                <p>Decoupling is good, because you can work with smaller chunks.</p>
             </aside>
         </textarea></section>
         <section id="immutability_gives_predictability">
             <h3><span style="color:slateblue">Immutability = Predictability</span></h3>
             <aside class="notes">
-                - You'll hear this term a lot from functional programmers. "Your code is easier to reason about."
-                - This is what it boils down to. Without state, your code is predictable.
+                <p>You'll hear this term a lot from functional programmers. "Your code is easier to reason about."</p>
+                <p>This is what it boils down to. Without state, your code is predictable.</p>
             </aside>
         </section>
     </section>
@@ -162,7 +162,7 @@
         <section id="declarative_programming_title_page">
             <h2><span style="color:slateblue">Declarative Programming</span></h2>
             <aside class="notes">
-                - As a by-product of functional programming, you often write declarative code instead of imperative code.
+                <p>As a by-product of functional programming, you often write declarative code instead of imperative code.</p>
             </aside>
         </section>
 
@@ -172,27 +172,27 @@
             Say <span style="color:blue">what things are</span> rather than <span style="color:red">how things are done</span>.
 
             <aside class="notes">
-                - Take loops as example, how can you implement a loop without changing things? Many times your index always changes!
-                - There are two alternatives for loops: list comprehensions and maps.
-                - If you think about them, they're definitions instead of an instruction to change things.
-                - Let's look at a bigger example.
+                <p>Take loops as example, how can you implement a loop without changing things? Many times your index always changes!</p>
+                <p>There are two alternatives for loops: list comprehensions and maps.</p>
+                <p>If you think about them, they're definitions instead of an instruction to change things.</p>
+                <p>Let's look at a bigger example.</p>
             </aside>
         </section>
         <section id="sieve_subtitle_page">
             <h2><span style="color:slateblue">Sieve of Eratosthenes</span></h2>
             <aside class="notes">
-                - The idea here is that we'd like to find all prime numbers.
-                - So the objective here is to make an infinite stream of prime numbers.
-                - Here is how we do it...
+                <p>The idea here is that we'd like to find all prime numbers.</p>
+                <p>So the objective here is to make an infinite stream of prime numbers.</p>
+                <p>Here is how we do it...</p>
             </aside>
         </section>
         <section id="sieve_init">
             <img data-src="figures/sieve.png" width="66%">
             <aside class="notes">
-                - Start with a stream of numbers starting from two to infinity.
-                - Take the head of the stream, and filter out all factors of the head.
-                - Repeat this step ad infinitum.
-                - Here is an illustration of the algorithm.
+                <p>Start with a stream of numbers starting from two to infinity.</p>
+                <p>Take the head of the stream, and filter out all factors of the head.</p>
+                <p>Repeat this step ad infinitum.</p>
+                <p>Here is an illustration of the algorithm.</p>
             </aside>
         </section>
         <section id="sieve_animation">
@@ -211,7 +211,7 @@
             [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59]
             ```
             <aside class="notes">
-                - Carefully go through the Haskell syntax.
+                <p>Carefully go through the Haskell syntax.</p>
             </aside>
         </textarea></section>
         <section data-markdown id="sieve_python"><textarea data-template>
@@ -230,8 +230,8 @@
             [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
             ```
             <aside class="notes">
-                - Note the difference between declarative and imperative programming.
-                - Now I'd like to introduce Coconut...
+                <p>Note the difference between declarative and imperative programming.</p>
+                <p>Now I'd like to introduce Coconut...</p>
             </aside>
         </textarea></section>
         <section data-markdown id="sieve_coconut"><textarea data-template>
@@ -250,10 +250,10 @@
             [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
             ```
             <aside class="notes">
-                - The first thing to note here is that Coconut is a superset of Python.
-                - All valid Python is valid Coconut. So you can just write Python if you'd like.
-                - Massage this imperative code to make it 1) more idiomatic and 2) more declarative.
-                - First up is this clunky lambda syntax...
+                <p>The first thing to note here is that Coconut is a superset of Python.</p>
+                <p>All valid Python is valid Coconut. So you can just write Python if you'd like.</p>
+                <p>Massage this imperative code to make it 1) more idiomatic and 2) more declarative.</p>
+                <p>First up is this clunky lambda syntax...</p>
             </aside>
         </textarea></section>
         <section data-markdown id="concise_lambdas"><textarea data-template>
@@ -272,12 +272,12 @@
             [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
             ```
             <aside class="notes">
-                - In Coconut, we can simply write an arrow for a lambda.
-                - It may seem minor, but if you're writing functional code, you often pass functions as arguments.
-                - In fact, this is how you should pass behaviours around instead of objects with methods.
-                - In that case, you'd like your building blocks to be as concise as possible.
-                - It may seem small, but this is very very nice to write functional codes with.
-                - Next up is functional composition...
+                <p>In Coconut, we can simply write an arrow for a lambda.</p>
+                <p>It may seem minor, but if you're writing functional code, you often pass functions as arguments.</p>
+                <p>In fact, this is how you should pass behaviours around instead of objects with methods.</p>
+                <p>In that case, you'd like your building blocks to be as concise as possible.</p>
+                <p>It may seem small, but this is very very nice to write functional codes with.</p>
+                <p>Next up is functional composition...</p>
             </aside>
         </textarea></section>
         <section data-markdown id="forward_piping"><textarea data-template>
@@ -296,12 +296,12 @@
             [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
             ```
             <aside class="notes">
-                - Instead of clumsy brackets, Coconut gives us a forward pipe operator that allows to do F# style code.
-                - There is another type of composition: the dot composition.
-                - It's right to left instead of left to right, which is similar to Haskell.
-                - Whatever you choose Haskell-style or F#-style it's more readable than the original.
-                - I've softened up on this after doing some Clojure, but I'd still prefer the F#-style code.
-                - Next up is currying...
+                <p>Instead of clumsy brackets, Coconut gives us a forward pipe operator that allows to do F# style code.</p>
+                <p>There is another type of composition: the dot composition.</p>
+                <p>It's right to left instead of left to right, which is similar to Haskell.</p>
+                <p>Whatever you choose Haskell-style or F#-style it's more readable than the original.</p>
+                <p>I've softened up on this after doing some Clojure, but I'd still prefer the F#-style code.</p>
+                <p>Next up is currying...</p>
             </aside>
         </textarea></section>
         <section data-markdown id="currying"><textarea data-template>
@@ -320,15 +320,15 @@
             [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
             ```
             <aside class="notes">
-                - Currying is a fancy name for partial application of a function.
-                - In Python, you have the partial module.
-                - The main idea is to start with a function of many arguments, and go down to a
+                <p>Currying is a fancy name for partial application of a function.</p>
+                <p>In Python, you have the partial module.</p>
+                <p>The main idea is to start with a function of many arguments, and go down to a</p>
                   function with fewer arguments (usually one).
-                - This makes the syntax more concise, because instead of writing a lambda in
+                  <p>This makes the syntax more concise, because instead of writing a lambda in</p>
                   takewhile, you write a curried takewhile.
-                - Note that in pure Python, you'd have to apply partial.
-                - It's hard, it's not readable. Nobody would ever do it.
-                - Next is iterator chaining...
+                  <p>Note that in pure Python, you'd have to apply partial.</p>
+                  <p>It's hard, it's not readable. Nobody would ever do it.</p>
+                  <p>Next is iterator chaining...</p>
             </aside>
         </textarea></section>
         <section data-markdown id="iterator_chaining"><textarea data-template>
@@ -346,12 +346,12 @@
             [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
             ```
             <aside class="notes">
-                - When you write functional code, you often work with lazy lists.
-                - The closest thing you have to this in Python is generators.
-                - In Coconut, there's a specialised syntax to deal with generators.
-                - In particular, you can append to the head.
-                - Here there's still an ugly side effect: the next function.
-                - We instead do pattern matching.
+                <p>When you write functional code, you often work with lazy lists.</p>
+                <p>The closest thing you have to this in Python is generators.</p>
+                <p>In Coconut, there's a specialised syntax to deal with generators.</p>
+                <p>In particular, you can append to the head.</p>
+                <p>Here there's still an ugly side effect: the next function.</p>
+                <p>We instead do pattern matching.</p>
             </aside>
         </textarea></section>
         <section data-markdown id="pattern_matching"><textarea data-template>
@@ -368,9 +368,9 @@
             [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
             ```
             <aside class="notes">
-                - Just like Haskell, we do pattern matching on the head and tail.
-                - Since `sieve` is defined inside the function, we know that it's never empty.
-                - Next is function assigments.
+                <p>Just like Haskell, we do pattern matching on the head and tail.</p>
+                <p>Since `sieve` is defined inside the function, we know that it's never empty.</p>
+                <p>Next is function assigments.</p>
             </aside>
         </textarea></section>
         <section data-markdown id="function_assignments"><textarea data-template>
@@ -386,12 +386,12 @@
             [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
             ```
             <aside class="notes">
-                - In many functional programming languages, you work with expressions instead of statements.
-                - Functions are just any other values. Its return value is simply the last value.
-                - These are called function assignments and we can skip the return statement.
-                - Note that sieve now looks very much like a lambda.
-                - In fact it is, you can write that as an argument of a function.
-                - Finally, we have builtin higher order functions...
+                <p>In many functional programming languages, you work with expressions instead of statements.</p>
+                <p>Functions are just any other values. Its return value is simply the last value.</p>
+                <p>These are called function assignments and we can skip the return statement.</p>
+                <p>Note that sieve now looks very much like a lambda.</p>
+                <p>In fact it is, you can write that as an argument of a function.</p>
+                <p>Finally, we have builtin higher order functions...</p>
             </aside>
         </textarea></section>
         <section data-markdown id="builtin_hofs"><textarea data-template>
@@ -405,10 +405,10 @@
             [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
             ```
             <aside class="notes">
-                - Guido took out reduce saying that it's non-trivial and confusing.
-                - Actually, reduce is just a fold operation in FP, and it's ubiquitous.
-                - This is an important point to make, because if it's not easy to do, you won't do it.
-                - People say Python is a functional language, but it makes your life hard to write FP style.
+                <p>Guido took out reduce saying that it's non-trivial and confusing.</p>
+                <p>Actually, reduce is just a fold operation in FP, and it's ubiquitous.</p>
+                <p>This is an important point to make, because if it's not easy to do, you won't do it.</p>
+                <p>People say Python is a functional language, but it makes your life hard to write FP style.</p>
             </aside>
         </textarea></section>
 
@@ -436,9 +436,9 @@
             >>> list(takewhile(x -> x < 60, primes()))
             ```
             <aside class="notes">
-                - There are many changes to be made from Python.
-                - There's no right or wrong and better or worse. It's a matter of preference.
-                - As someone who likes FP, I know I prefer the top version.
+                <p>There are many changes to be made from Python.</p>
+                <p>There's no right or wrong and better or worse. It's a matter of preference.</p>
+                <p>As someone who likes FP, I know I prefer the top version.</p>
             </aside>
         </textarea></section>
         <section data-markdown id="coconut_and_haskell"><textarea data-template>
@@ -462,7 +462,7 @@
             λ> takeWhile (<60) primes
             ```
             <aside class="notes">
-                - This is just to show how similar these two versions are.
+                <p>This is just to show how similar these two versions are.</p>
             </aside>
         </textarea></section>
     </section>
@@ -471,20 +471,20 @@
         <section id="pipeline_title_page">
             <h2><span style="color:slateblue">Machine Learning Pipeline</span></h2>
             <aside class="notes">
-                - Next, I'd like to talk about a more serious application of Coconut.
-                - Still very much a toy example, but a bit bigger.
+                <p>Next, I'd like to talk about a more serious application of Coconut.</p>
+                <p>Still very much a toy example, but a bit bigger.</p>
             </aside>
         </section>
         <section id="estimator_transformer_flowchart">
             <img data-src="figures/estimator_transformer_flowchart.png" width="150%">
             <aside class="notes">
-                - Go through the flowchart very slowly.
+                <p>Go through the flowchart very slowly.</p>
             </aside>
         </section>
         <section id="type_tetris_chart">
             <img data-src="figures/pipeline_scheme.png" width="60%">
             <aside class="notes">
-                - Go through the flowchart very slowly.
+                <p>Go through the flowchart very slowly.</p>
             </aside>
         </section>
         <section data-markdown><textarea data-template>
@@ -500,8 +500,8 @@
             pipeline      :: [PipelineStage] -> PipelineStage
             ```
             <aside class="notes">
-                - Explain type tetris.
-                - Go through types very slowly.
+                <p>Explain type tetris.</p>
+                <p>Go through types very slowly.</p>
             </aside>
         </textarea></section>
         <section data-markdown><textarea data-template>
@@ -552,8 +552,8 @@ def pipeline(stages):
     return Estimator(fit_fn)
 ```
             <aside class="notes">
-                - Go through the pipeline logic first. Then show the code.
-                - Notice triangle of death. This is not how you should do FP.
+                <p>Go through the pipeline logic first. Then show the code.</p>
+                <p>Notice triangle of death. This is not how you should do FP.</p>
             </aside>
             </textarea></section>
         </section>
@@ -623,10 +623,10 @@ def transform(column, factors, df) =
     feats = {name(f): df[column] == f for f in factors}
     df.assign(**feats)
 ```
-        <aside class="notes">
-            - As you can see, writing an estimator and a transformer is very similar to writing a class in Python.
-            - However, there are no ceremonies such as init and self.
-            - You are only dealing with algebraic data types and pure functions.
+        <aside class="notes" data-markdown>
+            <p>As you can see, writing an estimator and a transformer is very similar to writing a class in Python.</p>
+            <p>However, there are no ceremonies such as init and self.</p>
+            <p>You are only dealing with algebraic data types and pure functions.</p>
         </aside>
         </textarea></section>
     </section>
