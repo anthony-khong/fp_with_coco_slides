@@ -623,11 +623,6 @@ def transform(column, factors, df) =
     feats = {name(f): df[column] == f for f in factors}
     df.assign(**feats)
 ```
-        <aside class="notes" data-markdown>
-            <p>As you can see, writing an estimator and a transformer is very similar to writing a class in Python.</p>
-            <p>However, there are no ceremonies such as init and self.</p>
-            <p>You are only dealing with algebraic data types and pure functions.</p>
-        </aside>
         </textarea></section>
     </section>
 
