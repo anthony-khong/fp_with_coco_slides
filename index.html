@@ -26,14 +26,14 @@
     <section id="title_page">
         <h2><span style="color:slateblue">Pythonic FP with Coconut</span></h2>
         <h4>Anthony Khong</h4>
-        <h4>16 June 2018</h4>
+        <h4>09 August 2018</h4>
     </section>
 
     <section id="contents">
         <ol>
             <li>Functional Programming</li>
             <li>Declarative Programming by Example</li>
-            <li>Coconut for Machine Learning Pipeline</li>
+            <li>Other Cool Features</li>
         </ol>
     </section>
 
@@ -467,162 +467,79 @@
         </textarea></section>
     </section>
 
-    <section id="pipeline">
-        <section id="pipeline_title_page">
-            <h2><span style="color:slateblue">Machine Learning Pipeline</span></h2>
-            <aside class="notes">
-                <p>Next, I'd like to talk about a more serious application of Coconut.</p>
-                <p>Still very much a toy example, but a bit bigger.</p>
-            </aside>
+    <section id="other_cool_features">
+        <section id="other_cool_features_title_page">
+            <h2> <span style="color:slateblue">Other Cool Features</span></h2>
         </section>
-        <section id="estimator_transformer_flowchart">
-            <img data-src="figures/estimator_transformer_flowchart.png" width="150%">
-            <aside class="notes">
-                <p>Go through the flowchart very slowly.</p>
-            </aside>
-        </section>
-        <section id="type_tetris_chart">
-            <img data-src="figures/pipeline_scheme.png" width="60%">
-            <aside class="notes">
-                <p>Go through the flowchart very slowly.</p>
-            </aside>
-        </section>
-        <section data-markdown><textarea data-template>
-            <h3><span style="color:slateblue">Haskell-Style Type Tetris</span></h3>
-
-            ```haskell
-            Estimator     = Estimator (DataFrame -> Transformer)
-            Transformer   = Transformer (DataFrame -> DataFrame)
-            PipelineStage = Estimator | Transformer
-
-            fit           :: PipelineStage   -> DataFrame -> Transformer
-            transform     :: Transformer     -> DataFrame -> DataFrame
-            pipeline      :: [PipelineStage] -> PipelineStage
-            ```
-            <aside class="notes">
-                <p>Explain type tetris.</p>
-                <p>Go through types very slowly.</p>
-            </aside>
-        </textarea></section>
-        <section data-markdown><textarea data-template>
-            ```
-            data Estimator(fit_fn)
-            data Transformer(xform_fn)
-            ```
-            <p></p>
-            <img data-src="figures/data_scheme.png" width="80%">
-        </textarea></section>
-        <section data-markdown><textarea data-template>
+        <section data-markdown id="infix_functions"><textarea data-template>
+            <h4> <span style="color:slateblue">Infix Functions</span></h4>
             ```python
-            def transform(Transformer(xform_fn), df) = xform_fn(df)
+            def a `mod` b = a % b
+            print(321 `mod` 123)
             ```
-            <p></p>
-            <img data-src="figures/transform_scheme.png" width="80%">
+
+            <h4> <span style="color:slateblue">Pattern Matching Functions</span></h4>
+            ```python
+            def last_two(_ + [a, b]):
+                return a, b
+
+            def xydict_to_xytuple({"x": x is int, "y": y is int}):
+                return x, y
+            ```
+
+            <h4> <span style="color:slateblue">Destructuring Assigments</span></h4>
+            ```python
+            _ + [a, b] = [0, 1, 2, 3]
+            {'a': x, 'b': y, **_} = {'a': 10, 'b': 123}
+            [x] :: _ = primes() |> dropwhile$(x -> x < 5000)
+            ```
         </textarea></section>
-        <section data-markdown><textarea data-template>
+        <section data-markdown id="tail_call_opt"><textarea data-template>
+            <h4> <span style="color:slateblue">Tail Call Optimisation</span></h4>
             ```
-            def fit(Estimator(fit_fn), df) = fit_fn(df)
+            def is_even(0) = True
+            @addpattern(is_even)
+            def is_even(n is int if n > 0) = is_odd(n-1)
 
-            @addpattern(fit)
-            def fit(Transformer(xform_fn), _) = Transformer(xform_fn)
+            def is_odd(0) = False
+            @addpattern(is_odd)
+            def is_odd(n is int if n > 0) = is_even(n-1)
             ```
-            <p></p>
-            <img data-src="figures/fit_scheme.png" width="70%">
         </textarea></section>
-        <section>
-            <h3><span style="color:slateblue">What about Pipeline?</span></h3>
-            <p></p>
-            <img data-src="figures/pipeline_only_scheme.png" width="65%">
-            <p></p>
+        <section data-markdown id="data_keyword"><textarea data-template>
+            <h4> <span style="color:slateblue">Data Keyword</span></h4>
 
-            <section data-markdown class="fragment fade-up"><textarea data-template>
-```python
-def pipeline(stages):
-    def fit_fn(train_df):
-        fitted_stages = []
-        for stage in stages:
-            fitted_stage = fit(stage, train_df)
-            train_df = transform(fitted_stage, train_df)
-            fitted_stages.append(fitted_stage)
-        def xform_fn(test_df):
-            for fitted_stage in fitted_stages:
-                test_df = transform(fitted_stage, test_df)
-            return test_df
-        return Transformer(xform_fn)
-    return Estimator(fit_fn)
-```
-            <aside class="notes">
-                <p>Go through the pipeline logic first. Then show the code.</p>
-                <p>Notice triangle of death. This is not how you should do FP.</p>
-            </aside>
-            </textarea></section>
-        </section>
-        <section>
-            <img data-src="figures/red_card.gif" width="80%">
-        </section>
-        <section data-markdown><textarea data-template>
-            <h3><span style="color:slateblue">Pipeline Forms a Monoid</span></h3>
-
-            ```haskell
-            pipeline      :: [PipelineStage] -> PipelineStage
             ```
+            data Empty()
+            data Leaf(n)
+            data Node(l, r)
+            Tree = (Empty, Leaf, Node)
 
-            <img data-src="figures/monoid.png" width="30%">
+            def depth(Tree()) = 0
+
+            @addpattern(depth)
+            def depth(Tree(n)) = 1
+
+            @addpattern(depth)
+            def depth(Tree(l, r)) = 1 + max([depth(l), depth(r)])
+            ```
         </textarea></section>
-        <section data-markdown><textarea data-template>
-            <h3><span style="color:slateblue">What is a Monoid?</span></h3>
-
-            ```haskell
-            class Monoid m where
-                mempty  :: m
-                mappend :: m -> m -> m
-
-                mconcat :: [m] -> m
-                mconcat = foldr mappend mempty
+        <section data-markdown id="nicer_typing"><textarea data-template>
+            <h3> <span style="color:slateblue">MyPy + Nicer Typing</span></h3>
+            <h4><span style="color:mediumseagreen">Coconut</span></h4>
+            ```python
+            def int_map(f: int -> int, xs: int[]) -> int[] =
+                xs |> map$(f) |> list
             ```
-
-            <img data-src="figures/mconcat.png" width="30%">
-        </textarea></section>
-        <section data-markdown><textarea data-template>
+            <h4><span style="color:darkgreen">Python</span></h4>
+            ```python
+            from typing import Callable, Sequence
+            def int_map(
+                    f: Callable[[int], int], 
+                    xs: Sequence[int]
+                    ) -> Sequence[Int]:
+                return list(map(f, xs))
             ```
-            def mempty() = Transformer(df -> df)
-
-            def mappend(Transformer(fn0), Transformer(fn1)) =
-                Transformer(fn1..fn0)
-
-            @addpattern(mappend)
-            def mappend(stage0, stage1) =
-                def fit_fn(df) =
-                    xformer0 = df |> fit$(stage0)
-                    xformer1 = df |> transform$(xformer0) |> fit$(stage1)
-                    mappend(xformer0, xformer1)
-                Estimator(fit_fn)
-
-            def mconcat(stages) = reduce(mappend, stages)
-            pipeline = mconcat
-            ```
-            <p></p>
-            <img data-src="figures/pipeline_stage_scheme.png" width="70%">
-        </textarea></section>
-        <section data-markdown><textarea data-template>
-            <h3><span style="color:slateblue">One Hot Encoder</span></h3>
-
-```
-import numpy as np
-
-from pipeline import Estimator, Transformer
-
-def one_hot_encoder(column) = fit$(column) |> Estimator
-
-def fit(column, df) =
-    factors = np.unique(df[column])
-    transform$(column, factors) |> Transformer
-
-def transform(column, factors, df) =
-    name = factor -> f'feat:{column}_is_{factor}'
-    feats = {name(f): df[column] == f for f in factors}
-    df.assign(**feats)
-```
         </textarea></section>
     </section>
 
